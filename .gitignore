@@ -1,27 +1,36 @@
 # Python
 __pycache__/
-*.pyc
+*.py[cod]
 *.pyo
 *.pyd
-*.log
 
 # Virtual Environments
 venv/
 .venv/
+env/
+
+# Environment Variables
+.env
 
 # VS Code
 .vscode/
+
+# macOS
+.DS_Store
+
+# Linux
+*~
+
+# Logs
+*.log
+
+# Python Cache
+.pytest_cache/
+.mypy_cache/
 
 # Playwright
 playwright-report/
 test-results/
 
-# Screenshots
-screenshots/*.png
-
-# Environment Variables
-.env
-
-# OS Files
-.DS_Store
-Thumbs.db
+# Local configuration
+config.local.py
