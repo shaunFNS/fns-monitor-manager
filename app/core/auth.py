@@ -8,7 +8,7 @@ from app.core.config import (
 
 def login():
 
-    browser = BrowserManager()
+    browser = BrowserManager(headless=True)
 
     page = browser.start()
 
