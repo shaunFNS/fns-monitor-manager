@@ -1,0 +1,5 @@
+KUMA_URL = "http://192.168.20.159:3001"
+
+KUMA_USERNAME = "admin"
+
+KUMA_PASSWORD = "d55P9691"

@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.log
+
+# Virtual Environments
+venv/
+.venv/
+
+# VS Code
+.vscode/
+
+# Playwright
+playwright-report/
+test-results/
+
+# Screenshots
+screenshots/*.png
+
+# Environment Variables
+.env
+
+# OS Files
+.DS_Store
+Thumbs.db
