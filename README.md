@@ -154,7 +154,7 @@ http://YOURSERVER:8085/docs
 
 ```json
 {
-  "name": "Summit Counseling"
+  "name": "Example Client"
 }
 ```
 
@@ -170,7 +170,7 @@ http://YOURSERVER:8085/docs
 
 ```json
 {
-  "group": "Summit Counseling",
+  "group": "Example Client",
   "name": "Google DNS",
   "hostname": "8.8.8.8"
 }
@@ -188,9 +188,9 @@ http://YOURSERVER:8085/docs
 
 ```json
 {
-  "group": "Summit Counseling",
+  "group": "Example Client",
   "name": "Website",
-  "url": "https://summitcounseling.com"
+  "url": "https://google.com"
 }
 ```
 
@@ -204,8 +204,8 @@ Example:
 
 ```json
 {
-  "client": "Summit Counseling",
-  "website": "https://summitcounseling.com",
+  "client": "Example Client",
+  "website": "https://google.com",
   "public_ip": "1.2.3.4",
   "templates": [
     "website",
