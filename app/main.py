@@ -4,6 +4,7 @@ from app.api.groups import router as groups_router
 from app.api.login import router as login_router
 from app.api import ping
 from app.api import http
+from app.api import deploy_client
 
 app = FastAPI(
     title="Franke Network Solutions Monitor Manager",
@@ -14,6 +15,7 @@ app.include_router(login_router, prefix="/api")
 app.include_router(groups_router, prefix="/api")
 app.include_router(ping.router, prefix="/api")
 app.include_router(http.router, prefix="/api")
+
 
 @app.get("/", tags=["System"])
 def home():
@@ -29,4 +31,7 @@ def health():
         "healthy": True,
     }
 
-
+app.include_router(
+    deploy_client.router,
+    prefix="/api",
+)

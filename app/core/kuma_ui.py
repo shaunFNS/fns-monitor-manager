@@ -6,8 +6,9 @@ class KumaUI:
         self.page = page
 
     def click_add_monitor(self):
-        self.page.get_by_text(
-            selectors.ADD_MONITOR_BUTTON,
+        self.page.get_by_role(
+            "link",
+            name="Add New Monitor",
             exact=True,
         ).click()
 
@@ -32,7 +33,10 @@ class KumaUI:
         ).fill(url)
 
     def set_parent_group(self, group_name: str):
-        if not group_name or group_name.lower() == "none":
+        if not group_name:
+            return
+
+        if group_name.strip().lower() == "none":
             return
 
         self.page.locator(
@@ -40,10 +44,19 @@ class KumaUI:
         ).select_option(label=group_name)
 
     def save(self):
-        self.page.locator("form:visible").get_by_role(
+        self.page.locator(
+            "form:visible",
+        ).get_by_role(
             "button",
             name="Save",
             exact=True,
         ).click()
 
-        self.page.wait_for_load_state("networkidle")
+        self.page.get_by_role(
+            "link",
+            name="Add New Monitor",
+            exact=True,
+        ).wait_for(
+            state="visible",
+            timeout=30000,
+        )
