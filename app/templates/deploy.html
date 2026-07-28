@@ -1,0 +1,198 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="mb-4">
+    <h1 class="h2 mb-1">
+        Deploy Client
+    </h1>
+
+    <p class="text-secondary mb-0">
+        Create the client group and its Uptime Kuma monitors.
+    </p>
+</div>
+
+{% if error %}
+<div class="alert alert-danger" role="alert">
+    <strong>Deployment failed:</strong>
+    {{ error }}
+</div>
+{% endif %}
+
+{% if result %}
+<div class="alert alert-success" role="alert">
+    <h2 class="h5 alert-heading">
+        Deployment completed
+    </h2>
+
+    <p class="mb-2">
+        Client:
+        <strong>{{ result.client }}</strong>
+    </p>
+
+    <p class="mb-0">
+        Group:
+        <strong>{{ result.group }}</strong>
+    </p>
+</div>
+
+<div class="row g-4 mb-4">
+    <div class="col-md-6">
+        <div class="card h-100">
+            <div class="card-header bg-white">
+                <h2 class="h5 mb-0">
+                    Created
+                </h2>
+            </div>
+
+            <div class="card-body">
+                {% if result.created %}
+                <ul class="mb-0">
+                    {% for item in result.created %}
+                    <li>{{ item }}</li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p class="text-secondary mb-0">
+                    No new monitors were created.
+                </p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card h-100">
+            <div class="card-header bg-white">
+                <h2 class="h5 mb-0">
+                    Skipped
+                </h2>
+            </div>
+
+            <div class="card-body">
+                {% if result.skipped %}
+                <ul class="mb-0">
+                    {% for item in result.skipped %}
+                    <li>{{ item }}</li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p class="text-secondary mb-0">
+                    No monitors were skipped.
+                </p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<div class="card">
+    <div class="card-header bg-white">
+        <h2 class="h5 mb-0">
+            Client Information
+        </h2>
+    </div>
+
+    <div class="card-body">
+        <form method="post" action="/deploy">
+            <div class="mb-3">
+                <label
+                    for="client"
+                    class="form-label"
+                >
+                    Client name
+                </label>
+
+                <input
+                    type="text"
+                    class="form-control"
+                    id="client"
+                    name="client"
+                    value="{{ form_data.client if form_data else '' }}"
+                    placeholder="Summit Counseling"
+                    required
+                >
+            </div>
+
+            <div class="mb-4">
+                <label
+                    for="website"
+                    class="form-label"
+                >
+                    Website URL
+                </label>
+
+                <input
+                    type="url"
+                    class="form-control"
+                    id="website"
+                    name="website"
+                    value="{{ form_data.website if form_data else '' }}"
+                    placeholder="https://example.com"
+                    required
+                >
+            </div>
+
+            <h3 class="h6">
+                Ping monitors
+            </h3>
+
+            <p class="text-secondary small">
+                Enter one monitor name and one matching hostname on each line.
+            </p>
+
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label
+                        for="ping_names"
+                        class="form-label"
+                    >
+                        Monitor names
+                    </label>
+
+                    <textarea
+                        class="form-control"
+                        id="ping_names"
+                        name="ping_names"
+                        rows="6"
+                        placeholder="Gateway&#10;Google DNS&#10;Cloudflare DNS"
+                    >{{ form_data.ping_names if form_data else '' }}</textarea>
+                </div>
+
+                <div class="col-md-6">
+                    <label
+                        for="ping_hostnames"
+                        class="form-label"
+                    >
+                        Hostnames or IP addresses
+                    </label>
+
+                    <textarea
+                        class="form-control"
+                        id="ping_hostnames"
+                        name="ping_hostnames"
+                        rows="6"
+                        placeholder="192.168.1.1&#10;8.8.8.8&#10;1.1.1.1"
+                    >{{ form_data.ping_hostnames if form_data else '' }}</textarea>
+                </div>
+            </div>
+
+            <div class="mt-4 d-flex gap-2">
+                <button
+                    type="submit"
+                    class="btn btn-primary"
+                >
+                    Deploy Client
+                </button>
+
+                <a
+                    href="/"
+                    class="btn btn-outline-secondary"
+                >
+                    Cancel
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
+    <div>
+        <h1 class="h2 mb-1">Dashboard</h1>
+        <p class="text-secondary mb-0">
+            Manage client monitoring deployments from one place.
+        </p>
+    </div>
+
+    <a href="/deploy" class="btn btn-primary mt-3 mt-md-0">
+        Deploy Client
+    </a>
+</div>
+
+<div class="row g-4">
+    <div class="col-md-4">
+        <div class="card dashboard-card h-100">
+            <div class="card-body">
+                <div class="dashboard-icon">C</div>
+
+                <h2 class="h5 mt-3">Clients</h2>
+
+                <p class="text-secondary mb-0">
+                    Client inventory and deployment status will appear here.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card dashboard-card h-100">
+            <div class="card-body">
+                <div class="dashboard-icon">M</div>
+
+                <h2 class="h5 mt-3">Monitors</h2>
+
+                <p class="text-secondary mb-0">
+                    Monitor health and availability reporting will be added here.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card dashboard-card h-100">
+            <div class="card-body">
+                <div class="dashboard-icon">D</div>
+
+                <h2 class="h5 mt-3">Deployments</h2>
+
+                <p class="text-secondary mb-0">
+                    Recent deployment history will be shown here.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card mt-4">
+    <div class="card-header bg-white">
+        <h2 class="h5 mb-0">Quick Actions</h2>
+    </div>
+
+    <div class="card-body">
+        <div class="d-flex flex-wrap gap-2">
+            <a href="/deploy" class="btn btn-primary">
+                Deploy New Client
+            </a>
+
+            <a href="/docs" class="btn btn-outline-secondary" target="_blank">
+                Open API Documentation
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

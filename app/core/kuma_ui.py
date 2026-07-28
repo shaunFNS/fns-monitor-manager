@@ -43,6 +43,15 @@ class KumaUI:
             selectors.MONITOR_GROUP,
         ).select_option(label=group_name)
 
+    def item_exists(self, name: str) -> bool:
+        return (
+            self.page.get_by_text(
+                name,
+                exact=True,
+            ).count()
+            > 0
+        )
+
     def save(self):
         self.page.locator(
             "form:visible",

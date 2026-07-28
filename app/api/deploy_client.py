@@ -8,8 +8,9 @@ router = APIRouter()
 
 @router.post("/deploy-client")
 def deploy(deployment: DeployClient):
-    deploy_client(deployment)
+    result = deploy_client(deployment)
 
     return {
-        "status": "success"
+        "status": "success",
+        "deployment": result,
     }

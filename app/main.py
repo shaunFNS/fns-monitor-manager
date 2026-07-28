@@ -1,37 +1,57 @@
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 
+from app.api.deploy_client import router as deploy_client_api_router
 from app.api.groups import router as groups_router
-from app.api.login import router as login_router
-from app.api import ping
-from app.api import http
-from app.api import deploy_client
+from app.api.http import router as http_router
+from app.api.ping import router as ping_router
+from app.web.routes import router as web_router
+
 
 app = FastAPI(
-    title="Franke Network Solutions Monitor Manager",
-    version="1.0.0",
+    title="FNS Monitor Manager",
+    description="Monitoring deployment platform for Franke Network Solutions",
+    version="0.2.0",
 )
 
-app.include_router(login_router, prefix="/api")
-app.include_router(groups_router, prefix="/api")
-app.include_router(ping.router, prefix="/api")
-app.include_router(http.router, prefix="/api")
+app.mount(
+    "/static",
+    StaticFiles(
+        directory="/opt/fns-monitor-manager/app/static"
+    ),
+    name="static",
+)
 
-
-@app.get("/", tags=["System"])
-def home():
-    return {
-        "status": "online",
-        "service": "FNS Monitor Manager",
-    }
-
-
-@app.get("/health", tags=["System"])
-def health():
-    return {
-        "healthy": True,
-    }
+app.include_router(web_router)
 
 app.include_router(
-    deploy_client.router,
+    groups_router,
     prefix="/api",
+    tags=["Groups"],
 )
+
+app.include_router(
+    ping_router,
+    prefix="/api",
+    tags=["Ping Monitors"],
+)
+
+app.include_router(
+    http_router,
+    prefix="/api",
+    tags=["HTTP Monitors"],
+)
+
+app.include_router(
+    deploy_client_api_router,
+    prefix="/api",
+    tags=["Client Deployment"],
+)
+
+
+@app.get("/health")
+def health():
+    return {
+        "status": "healthy",
+        "service": "fns-monitor-manager",
+    }

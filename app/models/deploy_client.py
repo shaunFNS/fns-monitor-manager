@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class PingTarget(BaseModel):
@@ -9,4 +9,6 @@ class PingTarget(BaseModel):
 class DeployClient(BaseModel):
     client: str
     website: str
-    ping_targets: list[PingTarget] = []
+    ping_targets: list[PingTarget] = Field(
+        default_factory=list,
+    )
